@@ -1,4 +1,4 @@
-/* El camino oculto · paisaje
+/* Iaponia Incognita · paisaje
    Lo que hay pintado en el rollo, de lejos a cerca, con paralaje (p: 0 = infinito, 1 = el papel):
    el sol, tres cordilleras con nieblas que se mueven, el Fuji, el castillo, el mar con la flota y la isla, la llanura de
    Sekigahara, las colinas, la colina de Shiroyama y, delante, el camino de tinta por el que anda el rōnin, con el pino del

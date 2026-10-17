@@ -1,4 +1,4 @@
-/* El camino oculto · sonido
+/* Iaponia Incognita · sonido
    Todo sintetizado con Web Audio, sin archivos:
    - viento (ruido filtrado que sigue al viento del rollo), olas cerca del mar y pájaros de vez en cuando;
    - un koto (cuerda pulsada, Karplus-Strong) que suelta notas sueltas de la escala in (miyako-bushi);

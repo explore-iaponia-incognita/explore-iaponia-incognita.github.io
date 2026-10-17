@@ -1,4 +1,4 @@
-/* El camino oculto · estilos
+/* Iaponia Incognita (el camino oculto) · estilos
    Papel japonés, tinta sumi y un único acento bermellón (el rojo de los sellos) para lo que se descubre.
    Misma familia que «Terra incognita»: Instrument Serif para títulos, IBM Plex Mono para los instrumentos,
    y además caligrafía japonesa (Yuji Syuku) y mincho (Shippori Mincho), recortadas a los caracteres que se usan. */
@@ -51,8 +51,12 @@ html.oscuro .vineta { background: radial-gradient(ellipse 62% 62% at 50% 50%, rg
 /* ---------- marca ---------- */
 .marca { position: fixed; top: var(--margen); left: calc(var(--margen) + 18px); pointer-events: none; transition: opacity 0.8s var(--curva); }
 .titulo { margin: 0; font: 400 34px/1 var(--serif); letter-spacing: -0.01em; }
-.titulo em { font-style: italic; display: inline-block; transition: opacity 1s ease 0.6s, filter 1s ease 0.6s; }
-.completo .titulo .oculto { opacity: 0.18; filter: blur(2px); }
+.titulo em { font-style: italic; }
+/* al encontrar los diez, el «in» de incognita se tacha en bermellón y desaparece: Iaponia cognita (como Terra Incognita) */
+.titulo .pre { display: inline-block; position: relative; transition: max-width 1.2s var(--curva) 0.9s, opacity 0.8s ease 0.9s; max-width: 1em; vertical-align: bottom; overflow: hidden; }
+.titulo .pre::after { content: ""; position: absolute; left: -2px; right: -2px; top: 55%; height: 2px; background: var(--acento); transform: scaleX(0); transform-origin: left; transition: transform 0.7s var(--curva); }
+.completo .titulo .pre::after { transform: scaleX(1); }
+.completo .titulo .pre { max-width: 0; opacity: 0; }
 .sub { margin: 8px 0 0; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--tinta-3); }
 .en-escena .marca { opacity: 0.35; }
 .final-activo .marca { opacity: 1; }
@@ -206,7 +210,8 @@ html.oscuro .vineta { background: radial-gradient(ellipse 62% 62% at 50% 50%, rg
 .intro-enso { position: absolute; left: 50%; top: 50%; width: 230px; height: 230px; transform: translate(-50%, -52%); opacity: 0; transition: opacity 1.2s var(--curva); }
 .intro-enso.listo { opacity: 1; }
 .intro-kanji { position: relative; font: 400 120px/1 var(--kanji); color: var(--tinta); margin-bottom: 4px; }
-.intro h2 { margin: 6px 0 18px; font: 400 clamp(48px, 8vw, 84px)/0.92 var(--serif); letter-spacing: -0.02em; }
+.intro h2 { margin: 6px 0 10px; font: 400 clamp(48px, 8vw, 84px)/0.92 var(--serif); letter-spacing: -0.02em; }
+.intro-sub { margin: 0 0 18px; font: 400 12px/1.4 var(--mono); letter-spacing: 0.18em; text-transform: uppercase; color: var(--tinta-3); }
 .intro p { margin: 0 auto 30px; max-width: 480px; font: 400 21px/1.38 var(--serif); color: var(--tinta-2); }
 .intro button, .creditos-enlace, .creditos-cerrar {
   display: inline-flex; align-items: center; gap: 10px; padding: 15px 22px;

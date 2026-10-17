@@ -1,4 +1,4 @@
-/* El camino oculto · interfaz
+/* Iaponia Incognita · interfaz
    El registro de secretos, el progreso (en este navegador), el libro de los secretos, la tarjeta de cada escena,
    los créditos, los avisos, los instrumentos, el minimapa del rollo y la entrada. */
 (function () {

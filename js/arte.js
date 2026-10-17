@@ -1,4 +1,4 @@
-/* El camino oculto · arte
+/* Iaponia Incognita · arte
    Las piezas del paisaje pintadas con el motor de tinta (SA.tinta), una vez, en lienzos aparte:
    cordilleras en aguada con su niebla, pinos, ciruelos con flor roja, bambú, pagoda, castillo, torii, suelo de
    salpicadura, rocas, barcos, olas, pájaros… Cada función devuelve un lienzo { c, w, h } (y datos de anclaje).

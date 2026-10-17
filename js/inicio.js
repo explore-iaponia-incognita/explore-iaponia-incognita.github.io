@@ -1,4 +1,4 @@
-/* El camino oculto · arranque
+/* Iaponia Incognita · arranque
    Con ?prueba en la dirección, el libro deja probar todos los secretos (sin apuntarlos) y #id-del-secreto lo lanza al cargar.
    SA.debug sirve para probar desde la consola. */
 (function () {

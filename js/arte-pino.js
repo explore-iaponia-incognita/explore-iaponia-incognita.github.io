@@ -1,4 +1,4 @@
-/* El camino oculto · arte del pino
+/* Iaponia Incognita · arte del pino
    El pino negro (kuromatsu) del acantilado, la roca en la que se agarra y la isla de Ganryūjima, pintados con el motor de
    tinta (SA.tinta) como en un sumi-e:
    · el pino: tronco que se inclina y se tuerce, pintado con el pincel de lado (vetas secas), contorno oscuro, corteza de

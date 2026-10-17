@@ -1,4 +1,4 @@
-/* El camino oculto · arte de edificios
+/* Iaponia Incognita · arte de edificios
    El castillo (como el de Himeji), la pagoda de cinco pisos, el torii bermellón, la linterna de piedra y el junco de la
    flota mongola, pintados con el motor de tinta (SA.tinta) como lo haría un pintor: los muros son el papel con una aguada
    gris en el lado de la sombra; los tejados, una aguada con el alero de un solo trazo oscuro que se levanta en las puntas

@@ -1,5 +1,5 @@
 /* Final · El camino — al encontrar los diez secretos (y se puede volver a ver desde el libro).
-   Los diez sellos se estampan uno a uno sobre el rollo, se pinta un gran 道 y el título pierde lo de «oculto». */
+   Los diez sellos se estampan uno a uno sobre el rollo, se pinta un gran 道 y el título pierde el «in» de incognita: Iaponia cognita. */
 (function () {
   'use strict';
   var SA = window.SA, U = SA.util, C = SA.color, FX = SA.fx, TAU = Math.PI * 2;

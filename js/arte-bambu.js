@@ -1,4 +1,4 @@
-/* El camino oculto · arte · bambú
+/* Iaponia Incognita · arte · bambú
    El bosque de bambú a la manera sumi-e, en piezas que se pintan una vez y se montan en cada fotograma con drawImage:
    · tramos de caña (entrenudos): un solo trazo de abajo arriba con el pincel cargado de lado (un borde más oscuro); cada
      cerda deja su veta y se seca a su manera, y donde se seca queda el papel (blanco volante);

@@ -1,4 +1,4 @@
-/* El camino oculto · arte del cerezo y de Shiroyama
+/* Iaponia Incognita · arte del cerezo y de Shiroyama
    Dos piezas más de SA.arte, pintadas una vez con el motor de tinta:
    - A.cerezo: el cerezo viejo, solo junto al camino, en dos lienzos con las mismas ramas: «yemas» (principios de la
      primavera: ramas desnudas con yemas rojas) y «flor» (plena floración: nubes de flores rosa pálido). El juego funde

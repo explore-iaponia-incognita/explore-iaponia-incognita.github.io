@@ -1,4 +1,4 @@
-/* El camino oculto · motor
+/* Iaponia Incognita · motor
    Un rollo de papel japonés (emakimono) que se recorre en horizontal: cámara con inercia, capas con paralaje,
    papel, un pincel que pinta y se seca, la entrada (rueda, arrastre, táctil, teclado) y las escenas de los secretos.
    Todo en píxeles CSS. La unidad de diseño «u» es la altura de la pantalla: las posiciones del rollo van en u. */

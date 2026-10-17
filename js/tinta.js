@@ -1,4 +1,4 @@
-/* El camino oculto · tinta
+/* Iaponia Incognita · tinta
    El motor de pintura sumi-e: ruido, papel de arroz, pinceladas con cerdas (carga de tinta, pincel seco, colas afiladas),
    salpicaduras, aguadas moteadas con bordes húmedos, desenfoque y el «entintado» de siluetas (relleno negro con
    vetas de papel, grano y gotas). Todo se pinta en lienzos aparte, normalmente una sola vez al cargar. */

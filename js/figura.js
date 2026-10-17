@@ -1,4 +1,4 @@
-/* El camino oculto · figura
+/* Iaponia Incognita · figura
    Los personajes son siluetas de tinta articuladas, como las láminas de samuráis a contraluz:
    - un esqueleto (la pose: quieto, andar…) con piernas y brazos por IK de dos huesos;
    - un vestuario (el estilo: sombrero de paja, hakama, mangas, espadas…) que se pinta en negro, de atrás adelante;
