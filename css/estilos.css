@@ -1,0 +1,278 @@
+/* El camino oculto · estilos
+   Papel japonés, tinta sumi y un único acento bermellón (el rojo de los sellos) para lo que se descubre.
+   Misma familia que «Terra incognita»: Instrument Serif para títulos, IBM Plex Mono para los instrumentos,
+   y además caligrafía japonesa (Yuji Syuku) y mincho (Shippori Mincho), recortadas a los caracteres que se usan. */
+
+@font-face { font-family: "Instrument Serif"; font-style: normal; font-weight: 400; font-display: swap; src: url(../fuentes/InstrumentSerif-normal-400.woff2) format("woff2"); }
+@font-face { font-family: "Instrument Serif"; font-style: italic; font-weight: 400; font-display: swap; src: url(../fuentes/InstrumentSerif-italic-400.woff2) format("woff2"); }
+@font-face { font-family: "IBM Plex Mono"; font-style: normal; font-weight: 400; font-display: swap; src: url(../fuentes/IBMPlexMono-normal-400.woff2) format("woff2"); }
+@font-face { font-family: "IBM Plex Mono"; font-style: normal; font-weight: 500; font-display: swap; src: url(../fuentes/IBMPlexMono-normal-500.woff2) format("woff2"); }
+@font-face { font-family: "IBM Plex Mono"; font-style: normal; font-weight: 600; font-display: swap; src: url(../fuentes/IBMPlexMono-normal-600.woff2) format("woff2"); }
+@font-face { font-family: "Yuji Syuku"; font-style: normal; font-weight: 400; font-display: block; src: url(../fuentes/YujiSyuku-recorte.woff2) format("woff2"); }
+@font-face { font-family: "Shippori Mincho"; font-style: normal; font-weight: 400; font-display: block; src: url(../fuentes/ShipporiMincho-recorte.woff2) format("woff2"); }
+
+:root {
+  --papel: #eee6d4;
+  --panel: rgba(241, 234, 219, 0.95);
+  --tinta: #1b1815;
+  --tinta-2: rgba(27, 24, 21, 0.72);
+  --tinta-3: rgba(27, 24, 21, 0.48);
+  --tinta-4: rgba(27, 24, 21, 0.16);
+  --linea: rgba(27, 24, 21, 0.16);
+  --acento: #c4341f;
+  --acento-2: rgba(196, 52, 31, 0.5);
+  --serif: "Instrument Serif", "Iowan Old Style", Georgia, serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+  --kanji: "Yuji Syuku", "Hiragino Mincho ProN", "Yu Mincho", serif;
+  --mincho: "Shippori Mincho", "Hiragino Mincho ProN", "Yu Mincho", serif;
+  --margen: 28px;
+  --curva: cubic-bezier(0.2, 0.7, 0.1, 1);
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0; overflow: hidden;
+  background: var(--papel); color: var(--tinta);
+  font: 400 13px/1.45 var(--mono);
+  -webkit-font-smoothing: antialiased;
+  -webkit-user-select: none; user-select: none;
+}
+button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+button:focus-visible, a:focus-visible { outline: 1px solid var(--acento); outline-offset: 3px; }
+
+#lienzo { position: fixed; inset: 0; display: block; cursor: url(../cursor.png) 7 7, crosshair; touch-action: none; }
+/* la viñeta suave de los bordes del papel (antes se pintaba en el lienzo en cada fotograma) */
+.vineta { position: fixed; inset: 0; pointer-events: none; background: radial-gradient(ellipse 62% 62% at 50% 50%, rgba(120, 100, 70, 0) 72%, rgba(120, 100, 70, 0.22) 100%); }
+html.oscuro .vineta { background: radial-gradient(ellipse 62% 62% at 50% 50%, rgba(0, 0, 0, 0) 72%, rgba(0, 0, 0, 0.28) 100%); }
+.en-escena #lienzo { cursor: default; }
+
+/* ---------- marca ---------- */
+.marca { position: fixed; top: var(--margen); left: calc(var(--margen) + 18px); pointer-events: none; transition: opacity 0.8s var(--curva); }
+.titulo { margin: 0; font: 400 34px/1 var(--serif); letter-spacing: -0.01em; }
+.titulo em { font-style: italic; display: inline-block; transition: opacity 1s ease 0.6s, filter 1s ease 0.6s; }
+.completo .titulo .oculto { opacity: 0.18; filter: blur(2px); }
+.sub { margin: 8px 0 0; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--tinta-3); }
+.en-escena .marca { opacity: 0.35; }
+.final-activo .marca { opacity: 1; }
+
+/* ---------- botón del libro ---------- */
+.b-cuaderno {
+  position: fixed; top: calc(var(--margen) - 4px); right: calc(var(--margen) + 8px);
+  display: flex; flex-direction: column; gap: 9px; padding: 11px 14px 12px;
+  border: 1px solid var(--linea); background: rgba(238, 230, 212, 0.75);
+  -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
+  text-transform: uppercase; letter-spacing: 0.12em; font-size: 11px;
+  transition: border-color 0.3s, opacity 0.6s, transform 0.6s var(--curva);
+}
+.b-cuaderno:hover { border-color: var(--tinta-3); }
+.b-fila { display: flex; justify-content: space-between; gap: 22px; width: 100%; }
+.b-cont { color: var(--acento); font-weight: 500; }
+.segmentos { display: grid; grid-template-columns: repeat(10, 1fr); gap: 3px; width: 100%; min-width: 150px; }
+.segmentos i { height: 3px; background: var(--tinta-4); transition: background 0.6s; }
+.segmentos i.si { background: var(--acento); }
+.b-cuaderno.pulso { animation: pulso 1.4s var(--curva) 3; }
+@keyframes pulso { 0%, 100% { border-color: var(--linea); } 40% { border-color: var(--acento); box-shadow: 0 0 0 4px rgba(196, 52, 31, 0.12); } }
+.en-escena .b-cuaderno, .cuaderno-abierto .b-cuaderno { opacity: 0; pointer-events: none; transform: translateY(-8px); }
+
+/* ---------- instrumentos ---------- */
+.hud { position: fixed; pointer-events: none; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; transition: opacity 0.6s; }
+.hud-izq { left: calc(var(--margen) + 18px); bottom: calc(var(--margen) + 2px); display: grid; gap: 5px; }
+.hud-izq div { display: grid; grid-template-columns: 64px auto; align-items: center; }
+.hud-izq span { color: var(--tinta-3); }
+.hud-izq b { font-weight: 500; color: var(--tinta-2); font-variant-numeric: tabular-nums; }
+.barras { display: inline-flex; align-items: flex-end; gap: 3px; height: 12px; }
+.barras i { width: 4px; background: var(--tinta-4); transition: background 0.25s; }
+.barras i:nth-child(1) { height: 4px; } .barras i:nth-child(2) { height: 6px; } .barras i:nth-child(3) { height: 8px; } .barras i:nth-child(4) { height: 10px; } .barras i:nth-child(5) { height: 12px; }
+.barras i.si { background: var(--acento); }
+.hud-der { right: calc(var(--margen) + 18px); bottom: calc(var(--margen) + 2px); color: var(--tinta-3); text-align: right; max-width: calc(50vw - min(130px, 20vw) - var(--margen) - 60px); }   /* (no choca con el minimapa: si no cabe, en dos líneas) */
+.en-escena .hud, .en-escena .mapa { opacity: 0; pointer-events: none; }
+/* el suelo del rollo es de tinta: los textos de abajo llevan un parche de papel con el borde difuminado (como una inscripción) */
+/* (el parche de papel acaba en transparente justo en el borde de la caja: sin bordes rectos sobre la tinta oscura) */
+.hud-izq, .hud-der { padding: 20px 36px 18px; margin: -20px -36px -18px; background: radial-gradient(closest-side ellipse at 50% 52%, rgba(238, 230, 212, 0.95) 0%, rgba(238, 230, 212, 0.88) 55%, rgba(238, 230, 212, 0) 100%); }
+.mapa { background: rgba(238, 230, 212, 0.86); box-shadow: 0 0 16px 14px rgba(238, 230, 212, 0.86); border-radius: 50%; }
+
+.teclas { position: fixed; left: 50%; bottom: calc(var(--margen) + 22px); transform: translateX(-50%); display: flex; gap: 6px; pointer-events: none; }
+.teclas kbd, .saltar kbd {
+  font: 500 11px/1 var(--mono); padding: 5px 7px; min-width: 24px; text-align: center;
+  border: 1px solid var(--linea); color: var(--tinta-2); background: rgba(238, 230, 212, 0.8);
+}
+.teclas kbd { animation: tecla 2.2s ease forwards; }
+@keyframes tecla { 0% { opacity: 0; transform: translateY(6px); } 10%, 70% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+
+/* el minimapa: una línea con la ventana de lo que se ve */
+.mapa { position: fixed; left: 50%; bottom: calc(var(--margen) + 4px); width: min(260px, 40vw); height: 14px; transform: translateX(-50%); cursor: pointer; transition: opacity 0.6s; }
+.mapa::before { content: ""; position: absolute; left: 0; right: 0; top: 6px; height: 1px; background: var(--tinta-3); }
+.mapa i { position: absolute; top: 2px; height: 10px; border: 1px solid var(--tinta-2); background: rgba(238, 230, 212, 0.6); }
+.modo { position: fixed; left: 50%; bottom: calc(var(--margen) + 28px); transform: translateX(-50%); padding: 8px 14px; border: 1px solid var(--linea); background: rgba(238, 230, 212, 0.85); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; }
+
+/* ---------- libro de los secretos ---------- */
+.cuaderno {
+  position: fixed; top: 0; right: 0; bottom: 0; width: 420px; max-width: 100%;
+  display: flex; flex-direction: column;
+  background: var(--panel); border-left: 1px solid var(--linea);
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  transform: translateX(102%); transition: transform 0.6s var(--curva);
+  -webkit-user-select: text; user-select: text;
+  box-shadow: -12px 0 40px rgba(60, 40, 20, 0.08);
+}
+.cuaderno.abierto { transform: none; }
+.c-cabeza { display: flex; justify-content: space-between; align-items: flex-start; padding: 30px 28px 0; }
+.c-etq { margin: 0 0 6px; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--acento); }
+.cuaderno h2 { margin: 0; font: italic 400 34px/1 var(--serif); }
+.c-cerrar { width: 34px; height: 34px; border: 1px solid var(--linea); color: var(--tinta-2); font-size: 13px; }
+.c-cerrar:hover { border-color: var(--tinta-3); color: var(--tinta); }
+.c-intro { margin: 14px 28px 18px; font: 400 17px/1.35 var(--serif); color: var(--tinta-2); }
+.lista { list-style: none; margin: 0; padding: 0 28px; overflow-y: auto; flex: 1; border-top: 1px solid var(--linea); }
+.entrada { display: grid; grid-template-columns: 44px 1fr; gap: 4px; padding: 16px 0 17px; border-bottom: 1px solid var(--linea); }
+.e-num { font: 400 26px/1 var(--kanji); color: var(--tinta-3); padding-top: 2px; }
+.e-tipo { font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--tinta-3); }
+.e-nombre { margin: 3px 0 5px; font: 400 25px/1.05 var(--serif); min-height: 26px; }
+.e-nombre small { font: 400 15px/1 var(--mincho); color: var(--tinta-3); margin-left: 8px; }
+/* sin descubrir: un borrón de tinta */
+.e-censura { display: inline-block; height: 0.62em; vertical-align: 0.06em; background: var(--tinta); opacity: 0.82; border-radius: 45% 55% 50% 48% / 70% 40% 65% 45%; filter: blur(0.4px); }
+.e-pista { margin: 0; font: italic 400 16px/1.35 var(--serif); color: var(--tinta-2); }
+.e-meta { margin-top: 9px; display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center; font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--tinta-3); }
+.e-ver { color: var(--acento); letter-spacing: 0.12em; text-transform: uppercase; font-size: 10.5px; border-bottom: 1px solid transparent; }
+.e-ver:hover { border-bottom-color: var(--acento); }
+.entrada.hallada .e-num { color: var(--acento); }
+.entrada.hallada .e-nombre { font-style: italic; }
+.entrada.hallada .e-pista { color: var(--tinta-3); }
+.entrada.nueva .e-nombre { animation: revela 1.6s var(--curva); }
+@keyframes revela { from { opacity: 0; letter-spacing: 0.08em; filter: blur(6px); } to { opacity: 1; letter-spacing: 0; filter: none; } }
+.c-fuentes { margin: 0; padding: 10px 28px 0; font-size: 10px; letter-spacing: 0.08em; color: var(--tinta-3); }
+.c-credito { margin: 0; padding: 12px 28px 0; font: italic 400 16px/1.3 var(--serif); color: var(--tinta-3); }
+.c-credito a { color: var(--tinta); text-decoration: none; cursor: pointer; }
+.c-credito a:hover b { color: var(--acento); }
+.c-credito b { font-weight: 400; transition: color 0.2s; }
+.c-pie { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; padding: 16px 28px 26px; border-top: 1px solid var(--linea); margin-top: 12px; }
+.c-boton { font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--acento); }
+.c-boton-tenue { color: var(--tinta-3); margin-left: auto; }
+.c-boton:hover { color: var(--tinta); }
+
+/* ---------- tarjeta de cada secreto: kanji en vertical + texto ---------- */
+.tarjeta {
+  position: fixed; left: 6vw; bottom: 11vh; max-width: 620px; pointer-events: none;
+  display: flex; gap: 26px; align-items: flex-end;
+  opacity: 0; transform: translateY(14px); transition: opacity 0.9s var(--curva), transform 1.1s var(--curva);
+}
+.tarjeta.visible { opacity: 1; transform: none; }
+.tarjeta::before { content: ""; position: absolute; z-index: -1; inset: -80px -120px -70px -140px; background: radial-gradient(closest-side, rgba(238, 230, 212, 0.92), rgba(238, 230, 212, 0.7) 55%, rgba(238, 230, 212, 0)); }
+.oscuro .tarjeta::before { background: radial-gradient(closest-side, rgba(36, 40, 52, 0.85), rgba(36, 40, 52, 0.6) 55%, rgba(36, 40, 52, 0)); }
+.oscuro .t-kanji, .oscuro .t-tit { color: #f1eadb; }
+.oscuro .t-txt { color: rgba(241, 234, 219, 0.85); }
+.oscuro .t-pie { color: rgba(241, 234, 219, 0.6); }
+.oscuro .marca, .oscuro .saltar { color: #f1eadb; }
+.t-kanji { writing-mode: vertical-rl; font: 400 clamp(54px, 7vw, 92px)/1 var(--kanji); color: var(--tinta); letter-spacing: 0.02em; }
+.t-kanji:empty { display: none; }
+.t-etq { display: flex; align-items: center; gap: 12px; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--acento); }
+.t-etq::before { content: ""; width: 0; height: 1px; background: var(--acento); transition: width 1s var(--curva) 0.3s; }
+.tarjeta.visible .t-etq::before { width: 44px; }
+.t-tit { margin: 12px 0 12px; font: italic 400 clamp(40px, 5.4vw, 68px)/0.98 var(--serif); letter-spacing: -0.015em; }
+.t-txt { margin: 0; font: 400 19px/1.38 var(--serif); color: var(--tinta-2); max-width: 470px; }
+.t-pie { margin-top: 14px; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--tinta-3); }
+
+/* ---------- aviso, saltar ---------- */
+.aviso {
+  position: fixed; top: 26px; left: 50%; transform: translate(-50%, -16px); opacity: 0; pointer-events: none;
+  display: flex; align-items: center; gap: 12px; padding: 11px 16px;
+  border: 1px solid var(--acento-2); background: rgba(241, 234, 219, 0.95);
+  font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; white-space: nowrap;
+  transition: opacity 0.5s, transform 0.7s var(--curva);
+}
+.aviso::before { content: ""; width: 8px; height: 8px; background: var(--acento); }
+.aviso b { color: var(--acento); font-weight: 500; }
+.aviso.visible { opacity: 1; transform: translate(-50%, 0); }
+.saltar {
+  position: fixed; right: calc(var(--margen) + 18px); bottom: calc(var(--margen) - 2px);
+  display: flex; align-items: center; gap: 10px; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--tinta-3);
+  opacity: 0; pointer-events: none; transition: opacity 0.6s 0.8s, color 0.2s;
+}
+.en-escena .saltar { opacity: 1; pointer-events: auto; }
+.saltar:hover { color: var(--tinta); }
+
+/* ---------- entrada ---------- */
+.intro, .creditos {
+  position: fixed; inset: 0; display: grid; place-items: center; padding: 24px;
+  background: radial-gradient(ellipse at 50% 50%, rgba(238, 230, 212, 0.72), rgba(238, 230, 212, 0.95) 70%);
+  transition: opacity 0.9s var(--curva);
+}
+.intro[hidden], .creditos[hidden] { display: none; }
+.intro.saliendo { opacity: 0; pointer-events: none; }
+.intro-caja { max-width: 600px; text-align: center; }
+.creditos-caja { max-width: 980px; text-align: center; }
+.intro-marca { position: relative; width: 210px; height: 190px; margin: 0 auto 2px; display: grid; place-items: center; }
+.intro-enso { position: absolute; left: 50%; top: 50%; width: 230px; height: 230px; transform: translate(-50%, -52%); opacity: 0; transition: opacity 1.2s var(--curva); }
+.intro-enso.listo { opacity: 1; }
+.intro-kanji { position: relative; font: 400 120px/1 var(--kanji); color: var(--tinta); margin-bottom: 4px; }
+.intro h2 { margin: 6px 0 18px; font: 400 clamp(48px, 8vw, 84px)/0.92 var(--serif); letter-spacing: -0.02em; }
+.intro p { margin: 0 auto 30px; max-width: 480px; font: 400 21px/1.38 var(--serif); color: var(--tinta-2); }
+.intro button, .creditos-enlace, .creditos-cerrar {
+  display: inline-flex; align-items: center; gap: 10px; padding: 15px 22px;
+  font: 400 11px/1 var(--mono); letter-spacing: 0.18em; text-transform: uppercase; text-decoration: none;
+  transition: background 0.25s, color 0.25s, border-color 0.25s;
+}
+.intro button, .creditos-enlace { border: 1px solid var(--acento); color: var(--acento); }
+.intro button:hover, .creditos-enlace:hover { background: var(--acento); color: var(--papel); }
+
+/* ---------- créditos ---------- */
+.creditos { opacity: 0; transition: opacity 1.2s var(--curva); }
+.creditos.visible { opacity: 1; }
+.creditos.saliendo { opacity: 0; transition-duration: 0.6s; }
+.creditos-etq, .creditos-txt, .creditos-botones { opacity: 0; transform: translateY(10px); }
+.creditos-etq { margin: 0; font: 400 11px/1.4 var(--mono); letter-spacing: 0.24em; text-transform: uppercase; color: var(--acento); transition: opacity 0.9s 0.3s, transform 1.1s var(--curva) 0.3s; }
+.creditos-nombre { margin: 20px 0 0; font: italic 400 clamp(42px, 7vw, 100px)/0.95 var(--serif); letter-spacing: 0.08em; opacity: 0; filter: blur(12px); transition: opacity 1.4s 0.7s, filter 1.8s var(--curva) 0.7s, letter-spacing 2.4s var(--curva) 0.7s; }
+.creditos-linea { width: 0; height: 1px; margin: 28px auto 22px; background: var(--acento); transition: width 1.3s var(--curva) 1.7s; }
+.creditos-txt { margin: 0 0 32px; font: 400 21px/1.35 var(--serif); color: var(--tinta-2); transition: opacity 1s 2s, transform 1.2s var(--curva) 2s; }
+.creditos-botones { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; transition: opacity 1s 2.4s, transform 1.2s var(--curva) 2.4s; }
+.creditos.visible .creditos-etq, .creditos.visible .creditos-txt, .creditos.visible .creditos-botones { opacity: 1; transform: none; }
+.creditos.visible .creditos-nombre { opacity: 1; filter: none; letter-spacing: -0.015em; }
+.creditos.visible .creditos-linea { width: 72px; }
+.creditos-cerrar { border: 1px solid var(--linea); color: var(--tinta-2); }
+.creditos-cerrar:hover { border-color: var(--tinta-3); color: var(--tinta); }
+.creditos-enlace[hidden] { display: none; }
+
+/* ---------- pantallas estrechas ---------- */
+@media (max-width: 700px) {
+  :root { --margen: 18px; }
+  .titulo { font-size: 26px; }
+  .marca { left: var(--margen); }
+  .sub { font-size: 10px; margin-top: 6px; }
+  .b-cuaderno { padding: 9px 11px 10px; font-size: 10px; }
+  .b-fila { gap: 12px; }
+  .segmentos { min-width: 110px; }
+  .hud-der { display: none; }
+  .hud-izq { font-size: 10px; left: var(--margen); }
+  .mapa { bottom: calc(var(--margen) + 64px); }
+  .modo { bottom: calc(var(--margen) + 86px); }
+  .cuaderno { top: auto; left: 0; width: 100%; height: 82vh; border-left: 0; border-top: 1px solid var(--linea); transform: translateY(102%); }
+  .c-cabeza { padding: 22px 18px 0; }
+  .c-intro { margin: 10px 18px 14px; font-size: 16px; }
+  .lista { padding: 0 18px; }
+  .c-pie { padding: 14px 18px 22px; }
+  .c-fuentes, .c-credito { padding-left: 18px; padding-right: 18px; }
+  .tarjeta { left: 18px; right: 18px; bottom: 70px; gap: 14px; }
+  .t-kanji { font-size: 46px; }
+  .t-tit { font-size: 38px; }
+  .t-txt { font-size: 16px; }
+  .intro-kanji { font-size: 90px; }
+}
+@media (max-width: 480px) { .sub { display: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .tarjeta, .cuaderno, .aviso, .intro, .creditos, .creditos * { transition-duration: 0.01s !important; transition-delay: 0s !important; }
+}
+
+/* mientras se pinta lo primero: una gota de tinta que se expande en el papel */
+.cargando { position: fixed; inset: 0; z-index: 50; display: grid; place-content: center; justify-items: center; gap: 18px; background: var(--papel); color: var(--tinta-3); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; transition: opacity 0.7s; }
+.cargando.fuera { opacity: 0; pointer-events: none; }
+.cargando-gota { width: 46px; height: 46px; border-radius: 50%; background: radial-gradient(circle at 45% 42%, var(--tinta) 0 38%, rgba(27, 24, 21, 0.35) 52%, rgba(27, 24, 21, 0) 70%); animation: gota 1.6s ease-in-out infinite; }
+@keyframes gota { 0% { transform: scale(0.55); opacity: 0.6; } 50% { transform: scale(1); opacity: 1; } 100% { transform: scale(0.55); opacity: 0.6; } }
+
+/* el botón del sonido: un cuadrado de papel junto al libro; encendido, la nota en bermellón */
+.b-sonido { position: fixed; top: calc(var(--margen) - 4px); right: calc(var(--margen) + 8px + 232px); width: 50px; height: 51px; border: 1px solid var(--linea); background: rgba(238, 230, 212, 0.75); -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); color: var(--tinta-3); font-size: 17px; transition: border-color 0.3s, color 0.3s, opacity 0.6s; }
+.b-sonido:hover { border-color: var(--tinta-3); color: var(--tinta); }
+.b-sonido.activo { color: var(--acento); border-color: var(--acento); }
+.b-sonido:not(.activo)::after { content: ""; position: absolute; left: 9px; right: 9px; top: 50%; height: 1px; background: currentColor; transform: rotate(-35deg); }
+.en-escena .b-sonido, .cuaderno-abierto .b-sonido { opacity: 0.35; }
+@media (max-width: 640px) { .b-sonido { right: auto; left: calc(var(--margen) + 8px); top: auto; bottom: calc(var(--margen) + 56px); } }

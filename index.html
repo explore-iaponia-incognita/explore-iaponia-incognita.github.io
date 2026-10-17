@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>El camino oculto</title>
+  <meta name="description" content="Un rollo de tinta japonesa con diez secretos de samuráis escondidos.">
+  <meta name="author" content="Pau Morató Sebastià">
+  <meta name="theme-color" content="#eee6d4">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="El camino oculto">
+  <meta property="og:description" content="Un rollo de tinta japonesa con diez secretos de samuráis escondidos. Recórrelo, pinta sobre el papel… y encuéntralos.">
+  <meta property="og:url" content="https://paumoratosebastia.github.io/camino-oculto/">
+  <meta property="og:image" content="https://paumoratosebastia.github.io/camino-oculto/compartir.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+  <div class="cargando" id="cargando" aria-live="polite"><span class="cargando-gota" aria-hidden="true"></span><span>墨 · Moliendo la tinta…</span></div>
+  <canvas id="lienzo" aria-label="Rollo de papel japonés pintado con tinta. Desliza para recorrerlo y arrastra para pintar."></canvas>
+  <div class="vineta" aria-hidden="true"></div>
+
+  <header class="marca">
+    <h1 class="titulo">El camino <em class="oculto">oculto</em></h1>
+    <p class="sub" id="sub">隠された道 · Un rollo de tinta</p>
+  </header>
+
+  <button class="b-cuaderno" id="b-cuaderno" type="button" aria-expanded="false" aria-controls="cuaderno">
+    <span class="b-fila"><span class="b-etq">秘伝書 · Secretos</span><span class="b-cont" id="contador">00/10</span></span>
+    <span class="segmentos" id="segmentos" aria-hidden="true"></span>
+  </button>
+
+  <button class="b-sonido" id="b-sonido" type="button" aria-pressed="false" aria-label="Sonido" title="Sonido">♪</button>
+
+  <div class="hud hud-izq" id="hud" aria-hidden="true">
+    <div><span>Rollo</span><b id="h-rollo">0 %</b></div>
+    <div><span>Viento</span><b class="barras" id="h-viento"><i></i><i></i><i></i><i></i><i></i></b></div>
+    <div><span>Ki 気</span><b class="barras" id="h-ki"><i></i><i></i><i></i><i></i><i></i></b></div>
+  </div>
+  <div class="hud hud-der" id="ayuda">Desliza para avanzar · Arrastra para pintar</div>
+  <div class="teclas" id="teclas" aria-hidden="true"></div>
+
+  <!-- el minimapa del rollo: dónde estás y, con un clic, ir a otra parte -->
+  <div class="mapa" id="mapa" aria-label="Posición en el rollo"><i id="mapa-ventana"></i></div>
+  <button class="modo" id="modo" type="button" hidden>✍︎ Pincel</button>
+
+  <aside class="cuaderno" id="cuaderno" aria-hidden="true" aria-labelledby="cuaderno-titulo">
+    <div class="c-cabeza">
+      <div>
+        <p class="c-etq">秘伝書 · Hidensho</p>
+        <h2 id="cuaderno-titulo">Libro de los secretos</h2>
+      </div>
+      <button class="c-cerrar" id="cerrar-cuaderno" type="button" aria-label="Cerrar el libro">✕</button>
+    </div>
+    <p class="c-intro" id="c-intro"></p>
+    <ol class="lista" id="lista"></ol>
+    <p class="c-fuentes">Tipografías: Yuji Syuku y Shippori Mincho (OFL).</p>
+    <p class="c-credito" id="c-credito-linea" hidden>Un juego de <a id="c-credito" target="_blank" rel="noopener"><b id="c-credito-nombre"></b><span class="flecha"> ↗</span></a></p>
+    <div class="c-pie">
+      <button type="button" id="ver-final" class="c-boton" hidden>Ver el final otra vez</button>
+      <button type="button" id="borrar" class="c-boton c-boton-tenue">Borrar progreso</button>
+    </div>
+  </aside>
+
+  <section class="tarjeta" id="tarjeta" aria-live="polite">
+    <div class="t-kanji" id="t-kanji" aria-hidden="true"></div>
+    <div class="t-cuerpo">
+      <div class="t-etq" id="t-etq"></div>
+      <h2 class="t-tit" id="t-tit"></h2>
+      <p class="t-txt" id="t-txt"></p>
+      <div class="t-pie" id="t-pie"></div>
+    </div>
+  </section>
+
+  <div class="aviso" id="aviso" role="status"></div>
+  <button class="saltar" id="saltar" type="button">Saltar <kbd>Esc</kbd></button>
+
+  <div class="intro" id="intro" hidden>
+    <div class="intro-caja">
+      <div class="intro-marca" aria-hidden="true"><canvas class="intro-enso" id="intro-enso"></canvas><div class="intro-kanji">侍</div></div>
+      <h2>El camino <em>oculto</em></h2>
+      <p>Este rollo de tinta esconde diez secretos de los samuráis. Recórrelo, pinta sobre el papel, toca, escribe… o quédate quieto. Lo que encuentres quedará anotado en el libro de los secretos.</p>
+      <button type="button" id="empezar">Desenrollar el pergamino</button>
+    </div>
+  </div>
+
+  <div class="creditos" id="creditos" hidden role="dialog" aria-modal="true" aria-labelledby="creditos-nombre">
+    <div class="creditos-caja">
+      <p class="creditos-etq">Rollo pintado por</p>
+      <h2 class="creditos-nombre" id="creditos-nombre"></h2>
+      <div class="creditos-linea" aria-hidden="true"></div>
+      <p class="creditos-txt">Gracias por recorrer el camino hasta el final.</p>
+      <div class="creditos-botones">
+        <a class="creditos-enlace" id="creditos-enlace" target="_blank" rel="noopener">Ver su LinkedIn <span aria-hidden="true">↗</span></a>
+        <button type="button" class="creditos-cerrar" id="creditos-cerrar">Seguir explorando</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/motor.js"></script>
+  <script src="js/tinta.js"></script>
+  <script src="js/figura.js"></script>
+  <script src="js/arte.js"></script>
+  <script src="js/arte-bambu.js"></script>
+  <script src="js/arte-cerezo.js"></script>
+  <script src="js/arte-pino.js"></script>
+  <script src="js/arte-edificios.js"></script>
+  <script src="js/paisaje.js"></script>
+  <script src="js/interfaz.js"></script>
+  <script src="js/huevos/01-sekigahara.js"></script>
+  <script src="js/huevos/02-ganryujima.js"></script>
+  <script src="js/huevos/03-ninja.js"></script>
+  <script src="js/huevos/04-enso.js"></script>
+  <script src="js/huevos/05-tameshigiri.js"></script>
+  <script src="js/huevos/06-kamikaze.js"></script>
+  <script src="js/huevos/07-bushido.js"></script>
+  <script src="js/huevos/08-ronin.js"></script>
+  <script src="js/huevos/09-sakura.js"></script>
+  <script src="js/huevos/10-ultimo-samurai.js"></script>
+  <script src="js/huevos/final.js"></script>
+  <script src="js/sonido.js"></script>
+  <script src="js/inicio.js"></script>
+</body>
+</html>

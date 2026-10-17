@@ -1,0 +1,6 @@
+# Solo se publica la web. Las notas (con las soluciones) y las herramientas se quedan en local.
+LEEME.md
+CLAUDE.md
+herramientas/
+.DS_Store
+lab-*.html
